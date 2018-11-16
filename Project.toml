@@ -1,0 +1,8 @@
+name = "DPNPlot"
+uuid = "c1a535c8-b2c1-11e8-2502-0567457cd97f"
+authors = ["David Nadlinger <code@klickverbot.at>"]
+version = "0.1.0"
+
+[deps]
+PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
+PyPlot = "d330b81b-6aea-500a-939a-2ce795aea3ee"
