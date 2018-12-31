@@ -7,7 +7,7 @@ export label_line, label_lines
 Places a text label next to the end of a line in a line plot.
 """
 function label_line(line, x, label=none, align=true; xshift=0, yshift=0, extra_args...)
-    ax = line[:get_axes]()
+    ax = line["axes"]
     xdata = line[:get_xdata]()
     ydata = line[:get_ydata]()
 
@@ -62,7 +62,7 @@ function label_line(line, x, label=none, align=true; xshift=0, yshift=0, extra_a
     end
 
     if !haskey(kwargs, :backgroundcolor)
-        kwargs[:backgroundcolor] = ax[:get_axis_bgcolor]()
+        kwargs[:backgroundcolor] = ax[:get_facecolor]()
     end
 
     if !haskey(kwargs, :clip_on)
@@ -83,7 +83,7 @@ Annotates the given lines with a text label adjacent to their end points (none
 if label property not set).
 """
 function label_lines(lines::Vector, align=true, xvals=nothing; kwargs...)
-    ax = lines[1][:get_axes]()
+    ax = lines[1]["axes"]
     lab_lines = []
     labels = []
 
