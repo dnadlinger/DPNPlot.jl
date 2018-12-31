@@ -10,7 +10,7 @@ function pi_axis_labels(min, max, step = 1//2)
 
         sign = factor < 0 ? "-" : ""
 
-        abs_num = abs(num(factor))
+        abs_num = abs(numerator(factor))
         num_string =
             if abs_num == 0
                 "0"
@@ -20,10 +20,10 @@ function pi_axis_labels(min, max, step = 1//2)
                 "$abs_num \\pi"
             end
 
-        if den(factor) == 1
+        if denominator(factor) == 1
             push!(labels, "\$ $sign $num_string \$")
         else
-            push!(labels, "\$ $sign \\frac{$num_string}{$(den(factor))} \$")
+            push!(labels, "\$ $sign \\frac{$num_string}{$(denominator(factor))} \$")
         end
     end
 

@@ -3,6 +3,8 @@
 
 export label_line, label_lines
 
+using PyCall
+
 """
 Places a text label next to the end of a line in a line plot.
 """
@@ -31,15 +33,17 @@ function label_line(line, x, label=none, align=true; xshift=0, yshift=0, extra_a
         label = line[:get_label]()
     end
 
-    trans_angl = 0
+    trans_angle = 0
     if align
         # Compute the slope
         dx = xdata[ip + 1] - xdata[ip]
         dy = ydata[ip + 1] - ydata[ip]
-        ang = atan2(dy, dx) |> rad2deg
+        ang::Float64 = atan2(dy, dx) |> rad2deg
 
-        # Transform to screen coordinates
-        pt = [x, y]'
+        # Transform to screen coordinates.
+        # Use reshape() here to avoid getting out a RowVector, which isn't
+        # currently converted into an ndarray by PyCall.jl.
+        pt = reshape([x, y], (1, 2))
         trans_angle = ax["transData"][:transform_angles]([ang], pt)[1]
     end
 
