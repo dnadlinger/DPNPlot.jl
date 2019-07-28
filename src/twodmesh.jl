@@ -8,7 +8,7 @@ function center_to_corner_coords(xs)
         [-0.5, 0.5] .+ xs[1]
     else
         step = xs[2] - xs[1]
-        [xs; [xs[end] + step]] - step / 2
+        [xs; [xs[end] + step]] .- step / 2
     end
 end
 
