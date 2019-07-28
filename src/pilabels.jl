@@ -35,6 +35,6 @@ Places ticks and labels on an axis in given multiples of π.
 """
 function set_pi_axis_labels(axis, min, max, step = 1//2)
     locs, labels = pi_axis_labels(min, max, step)
-    axis[:set_ticks](locs)
-    axis[:set_ticklabels](labels)
+    axis.set_ticks(locs)
+    axis.set_ticklabels(labels)
 end

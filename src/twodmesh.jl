@@ -41,9 +41,9 @@ function plot_equidistant_2d_mesh(xs::Vector, ys::Vector, zs::Matrix, ax=nothing
 
     corner_xs = center_to_corner_coords(xs)
     corner_ys = center_to_corner_coords(ys)
-    img = ax[:pcolormesh](corner_xs, corner_ys, zs'; kwargs...)
-    ax[:set_xlim](corner_xs[1], corner_xs[end])
-    ax[:set_ylim](corner_ys[1], corner_ys[end])
+    img = ax.pcolormesh(corner_xs, corner_ys, zs'; kwargs...)
+    ax.set_xlim(corner_xs[1], corner_xs[end])
+    ax.set_ylim(corner_ys[1], corner_ys[end])
 
     ax, img
 end
