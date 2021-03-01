@@ -35,7 +35,7 @@ Returns
 A tuple with the Axes and plot objects.
 """
 function plot_equidistant_2d_mesh(xs::Vector, ys::Vector, zs::Matrix, ax=nothing; kwargs...)
-    if ax == nothing
+    if ax === nothing
         ax = gca()
     end
 
