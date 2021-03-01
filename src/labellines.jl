@@ -38,7 +38,7 @@ function label_line(line, x, label=none, align=true; xshift=0, yshift=0, extra_a
         # Compute the slope
         dx = xdata[ip + 1] - xdata[ip]
         dy = ydata[ip + 1] - ydata[ip]
-        degrees::Float64 = atan2(dy, dx) |> rad2deg
+        degrees::Float64 = atan(dy, dx) |> rad2deg
 
         # Transform to screen coordinates.
         # Use reshape() here to avoid getting out a RowVector, which isn't
@@ -79,7 +79,7 @@ function label_line(line, x, label=none, align=true; xshift=0, yshift=0, extra_a
 
     kwargs[:rotation] = transformed_degrees
 
-    ax[:text](x + xshift, y + yshift, label; kwargs...)
+    ax.text(x + xshift, y + yshift, label; kwargs...)
 end
 
 """
@@ -87,13 +87,13 @@ Annotates the given lines with a text label adjacent to their end points (none
 if label property not set).
 """
 function label_lines(lines::Vector, align=true, xvals=nothing; kwargs...)
-    ax = lines[1]["axes"]
+    ax = lines[1].axes
     lab_lines = []
     labels = []
 
     #Take only the lines which have labels other than the default ones
     for line in lines
-        label = line[:get_label]()
+        label = line.get_label()
         if !contains(label, "_line")
             push!(lab_lines, line)
             push!(labels, label)
@@ -101,12 +101,12 @@ function label_lines(lines::Vector, align=true, xvals=nothing; kwargs...)
     end
 
     if xvals == nothing
-        xmin, xmax = ax[:get_xlim]()
-        xvals = linspace(xmin, xmax, length(lab_lines) + 2)[2:end-1]
+        xmin, xmax = ax.get_xlim()
+        xvals = range(xmin, xmax, length=(length(lab_lines) + 2))[2:end-1]
     end
 
     for (line, x, label) in zip(lab_lines, xvals, labels)
-        xrange = extrema(line[:get_xdata]())
+        xrange = extrema(line.get_xdata())
         label_line(line, clamp(x, xrange...), label, align; kwargs...)
     end
 end
